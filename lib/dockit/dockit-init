@@ -33,4 +33,9 @@ fi
 
 [ -n "$metacopy" ] && chown -R "$mount_as:$(id -g $mount_as)" /docked
 
-su "$run_as" -s "$(dirname "$0")/dockit-sh"
+if [ -z "$log_session" ]
+then
+    su "$run_as" -s "$(dirname "$0")/dockit-sh"
+else
+    su "$run_as" -c "/usr/bin/script /host/dockit_session_log"
+fi

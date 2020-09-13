@@ -9,6 +9,7 @@ help() {
     printf 'Options:\n'
     printf -- '-h            this help text\n'
     printf -- '-d            detach; run in background, useful for scripting\n'
+    printf -- '-l            log session with script.\n'
     printf -- '-n            no mount; just run the image\n'
     printf -- '-i            skip ignores; do not remove files ignored by VCS or Docker\n'
     printf -- '-m <user>     mount directory as <user> instead of default\n'
@@ -20,7 +21,7 @@ help() {
 
 }
 
-while getopts ":hdnim:r:o:u" opt
+while getopts ":hdlm:nr:io:u" opt
 do
     case $opt in
         h)
@@ -28,6 +29,8 @@ do
             ;;
         d)
             detach=true
+            ;;
+        l)  log_session=1
             ;;
         m)
             mount_as=$OPTARG
@@ -110,6 +113,7 @@ export lib_src
 export mount_as
 export run_as
 export ignore_skip
+export log_session
 
 if [ "$no_mount" ]
 then
@@ -133,6 +137,7 @@ else
     -e mount_as \
     -e run_as \
     -e ignore_skip \
+    -e log_session \
     -v /overlay \
     -v "$(pwd)":/host'
 

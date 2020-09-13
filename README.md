@@ -57,10 +57,12 @@ Usage: dockit [options] <image>
 Options:
 -h         this help text
 -d         detach; run in background, useful for scripting
+-l         log session with script
 -n         no mount; just run the image
 -i         skip ignores; do not remove files ignored by VCS or Docker
 -m <user>  mount directory as <user> instead of default
 -r <user>  run shell as <user> instead of default
+-u         update image before mounting
 ```
 
 ## Exporting
